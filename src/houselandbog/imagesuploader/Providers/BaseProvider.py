@@ -1,31 +1,31 @@
-from abc import ABCMeta
+from abc import ABC as AbstractClass
 from abc import abstractmethod
 
 
-class BaseProvider(ABCMeta):
-    def __init__(self, *args):
-        super(BaseProvider, self).__init__(*args))
-
-    @abstractmethod
-    def upload(self, parameter_list):
+class BaseProvider(AbstractClass):
+    def __init__(self, host, port, user, password, tls=False):
         pass
 
     @abstractmethod
-    def download(self, parameter_list):
+    def upload(self, butcket, filename):
+        pass
+
+    @abstractmethod
+    def download(self, butcket, filename, destination):
         pass
     
     @abstractmethod
-    def exists(self, parameter_list):
+    def exists(self, bucket, filename):
         pass
     
     @abstractmethod
-    def mkdir(self, parameter_list):
+    def mkdir(self, bucket, path):
         pass
 
     @abstractmethod
-    def pwd(self, parameter_list):
+    def pwd(self):
         pass
 
     @abstractmethod
-    def quit(self, parameter_list):
+    def quit(self):
         pass
