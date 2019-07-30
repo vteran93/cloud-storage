@@ -6,7 +6,7 @@ import os
 class FtpProvider(BaseProvider):
 
     def __init__(self, host, port, user, password, tls=False):
-        self.ftp_conn = self.__connect(host, port, user, password, tls=False)
+        self.ftp_conn = self.__connect(host, port, user, password, tls)
 
     def upload(self, butcket, filename):
         return self.ftp_conn.storbinary('STOR %s%s%s'% (butcket, os.sep, filename), open(filename, 'rb'))
@@ -37,9 +37,10 @@ class FtpProvider(BaseProvider):
             return self.__connectFtp(host, port, user, password)
 
     def __connectTls(self, host, user, password):
-        ftp_tls = FTP_TLS(host, user, password)
-        #ftp_tls.sendcmd('USER %s' % user)
-        #ftp_tls.sendcmd('PASS %s' % password)
+        ftp_tls = FTP_TLS(host)
+        ftp_tls.login(user, password)
+
+        ftp_tls.prot_p()
         
         return ftp_tls
 
