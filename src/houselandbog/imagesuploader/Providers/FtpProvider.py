@@ -1,34 +1,34 @@
-from BaseProvider import BaseProvider
+import os
 from ftplib import FTP
 from ftplib import FTP_TLS
-import os
+from BaseProvider import BaseProvider
 
 class FtpProvider(BaseProvider):
 
     def __init__(self, host, port, user, password, tls=False):
-        self.ftp_conn = self.__connect(host, port, user, password, tls)
+        self.__connection = self.__connect(host, port, user, password, tls)
 
     def upload(self, butcket, filename):
-        return self.ftp_conn.storbinary('STOR %s%s%s'% (butcket, os.sep, filename), open(filename, 'rb'))
+        return self.__connection.storbinary('STOR %s%s%s'% (butcket, os.sep, filename), open(filename, 'rb'))
 
     def download(self, butcket, filename, destination):
         handle = open(destination + os.sep + filename, 'wb')
-        return self.ftp_conn.retrbinary('RETR %s%s%s' % (butcket, os.sep, filename), handle.write)
+        return self.__connection.retrbinary('RETR %s%s%s' % (butcket, os.sep, filename), handle.write)
 
     def exists(self, bucket, filename):
         return self.__exists_folder(bucket, filename) or self.__exists_file(bucket, filename)
 
     def mkdir(self, bucket, path):
         if(not self.exists(bucket, path)):
-            return self.ftp_conn.mkd('%s%s%s' % (bucket, os.sep, path))
+            return self.__connection.mkd('%s%s%s' % (bucket, os.sep, path))
         else:
-            raise Exception('Directory %s already exists on %s' %(path, bucket))
+            raise IOError('Directory %s already exists on %s' %(path, bucket))
 
     def pwd(self):
-        return self.ftp_conn.pwd()
+        return self.__connection.pwd()
 
     def quit(self):
-        return self.ftp_conn.quit()
+        return self.__connection.quit()
 
     def __connect(self, host, port, user, password, tls=False):
         if(tls):
@@ -41,7 +41,7 @@ class FtpProvider(BaseProvider):
         ftp_tls.login(user, password)
 
         ftp_tls.prot_p()
-        
+
         return ftp_tls
 
     def __connectFtp(self, host, port, user, password):
@@ -51,8 +51,8 @@ class FtpProvider(BaseProvider):
     
     def __exists_folder(self, bucket, filename):
         try:
-            self.ftp_conn.cwd(bucket + os.sep + filename)
-            self.ftp_conn.cwd('/')
+            self.__connection.cwd(bucket + os.sep + filename)
+            self.__connection.cwd('/')
 
             return True
         except Exception as identifier:
@@ -60,13 +60,13 @@ class FtpProvider(BaseProvider):
     
     def __exists_file(self, bucket, filename):
         try:
-            return self.ftp_conn.size(bucket + os.sep + filename) > 0
+            return self.__connection.size(bucket + os.sep + filename) > 0
         except Exception as identifier:
             return False
 
 if __name__ == "__main__":
 
-    ftp = FtpProvider('192.168.10.10', 22, 'vsftp', 'secret', True)
+    ftp = FtpProvider('192.168.10.10', 21, 'vsftp', 'secret', True)
     ftp.upload('test', 'captura.png')
     ftp.download('test', 'captura.png', '/home/victor/')
     print( 'mi alma ' + ftp.exists('test', 'mi alma.png').__str__())

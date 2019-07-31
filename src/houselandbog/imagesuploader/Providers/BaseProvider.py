@@ -1,31 +1,34 @@
-from abc import ABC as AbstractClass
 from abc import abstractmethod
+from abc import ABC as AbstractClass
 
 
 class BaseProvider(AbstractClass):
-    def __init__(self, host, port, user, password, tls=False):
-        pass
+
+    __connection = None
+
+    def __init__(self, host, port, user, password):
+        raise NotImplementedError()
 
     @abstractmethod
-    def upload(self, butcket, filename):
-        pass
+    def upload(self, butcket, filename, destination):
+        raise NotImplementedError()
 
     @abstractmethod
     def download(self, butcket, filename, destination):
-        pass
+        raise NotImplementedError()
     
     @abstractmethod
     def exists(self, bucket, filename):
-        pass
+        raise NotImplementedError()
     
     @abstractmethod
     def mkdir(self, bucket, path):
-        pass
+        raise NotImplementedError()
 
     @abstractmethod
     def pwd(self):
-        pass
+        raise NotImplementedError()
 
     @abstractmethod
     def quit(self):
-        pass
+        raise NotImplementedError()
