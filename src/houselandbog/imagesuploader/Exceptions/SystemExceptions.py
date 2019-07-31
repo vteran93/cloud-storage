@@ -1,4 +1,4 @@
-class StorageError(Exception):pass
+class StorageError(IOError):pass
 
 class UnableToUploadFile(StorageError): pass
 
