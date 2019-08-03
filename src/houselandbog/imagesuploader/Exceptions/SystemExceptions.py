@@ -5,3 +5,5 @@ class UnableToUploadFile(StorageError): pass
 class UnableToDownload(StorageError):pass
 
 class UnableToLogin(StorageError):pass
+
+class UndefinedDriver(ImportError): pass
