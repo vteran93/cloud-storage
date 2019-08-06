@@ -36,7 +36,6 @@ setuptools.setup(
         'PyNaCl==1.3.0',
         'pysftp==0.2.9',
         'pytz==2019.2',
-        'requests==2.22.0',
         'rsa==4.0',
         'six==1.12.0',
         'typed-ast==1.4.0',
