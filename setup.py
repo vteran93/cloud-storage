@@ -2,7 +2,7 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 setuptools.setup(
-    name='images-uploader',
+    name='cloud-uploader',
     version='0.1',
     scripts=[''],
     author="Victor Francisco Teran Herrera",
@@ -29,7 +29,7 @@ setuptools.setup(
         'urllib3',
         'wrapt==1.11.2',
     ],
-    url="https://bitbucket.org/houselandbog/imagesuploader",
+    url='https://bitbucket.org/houselandbog/cloud-uploader',
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
