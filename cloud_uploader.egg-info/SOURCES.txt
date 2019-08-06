@@ -1,0 +1,7 @@
+README.md
+setup.py
+cloud_uploader.egg-info/PKG-INFO
+cloud_uploader.egg-info/SOURCES.txt
+cloud_uploader.egg-info/dependency_links.txt
+cloud_uploader.egg-info/requires.txt
+cloud_uploader.egg-info/top_level.txt

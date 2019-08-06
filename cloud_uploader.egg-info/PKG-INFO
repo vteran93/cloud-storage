@@ -1,8 +1,8 @@
 Metadata-Version: 2.1
-Name: images-uploader
+Name: cloud-uploader
 Version: 0.1
 Summary: A package to control uploads and downloads from diference platforms
-Home-page: https://bitbucket.org/houselandbog/imagesuploader
+Home-page: https://bitbucket.org/houselandbog/cloud-uploader
 Author: Victor Francisco Teran Herrera
 Author-email: vteran93@yahoo.es
 License: UNKNOWN
