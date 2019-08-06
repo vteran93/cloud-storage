@@ -1,5 +1,16 @@
 README.md
 setup.py
+cloud/__init__.py
+cloud/uploader/FileSystem.py
+cloud/uploader/__init__.py
+cloud/uploader/Exceptions/SystemExceptions.py
+cloud/uploader/Exceptions/__init__.py
+cloud/uploader/providers/AmazonProvider.py
+cloud/uploader/providers/BaseProvider.py
+cloud/uploader/providers/FtpProvider.py
+cloud/uploader/providers/GoogleProvider.py
+cloud/uploader/providers/SFTPProvider.py
+cloud/uploader/providers/__init__.py
 cloud_uploader.egg-info/PKG-INFO
 cloud_uploader.egg-info/SOURCES.txt
 cloud_uploader.egg-info/dependency_links.txt
