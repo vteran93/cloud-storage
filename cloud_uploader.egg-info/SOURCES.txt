@@ -1,4 +1,5 @@
 README.md
+setup.cfg
 setup.py
 cloud/__init__.py
 cloud/uploader/FileSystem.py
