@@ -1,10 +1,10 @@
-
+import sys
 from providers.FtpProvider import FtpProvider
 from providers.SFTPProvider import SFTPProvider
 from configuration.ConfigLoader import ConfigLoader
 from providers.GoogleProvider import GoogleProvider
 from providers.AmazonProvider import AmazonProvider
-from Exceptions.SystemExceptions import UndefinedDriver, UnableToConnect
+from Exceptions.SystemExceptions import UndefinedDriver, UnableToConnect, UnableToUploadFile, UnableToConnect
 
 
 class FileSystem(object):
@@ -22,29 +22,46 @@ class FileSystem(object):
     def __init__(self, driver, user_config={}):
         self.__set_connection(driver, user_config)
 
-    def upload(self,):
-        pass
+    def upload(self,bucket, filename):
+        try:
+            self.__connection.upload(bucket, filename)
+        except Exception as identifier:
+            tb = sys.exc_info()[2]
+            raise UnableToUploadFile('The requested file %s was unable to upload' %(filename)).with_traceback(tb)
 
-    def download(self, ):
-        pass
+    def download(self, butcket, filename, destination):
+        try:
+            self.__connection.download(butcket, filename, destination)
+        except Exception as identifier:
+            tb = sys.exc_info()[2]
+            raise UnableToUploadFile('The requested file %s was unable to download' %(filename)).with_traceback(tb)
 
-    def exists(self, ):
-        pass
+    def exists(self, bucket, path):
+        try:
+            return self.__connection.exists(bucket, path)
+        except Exception as identifier:
+            tb = sys.exc_info()[2]
+            raise UnableToConnect('I have a problem to check if %s exists' %(path)).with_traceback(tb)
 
-    def mkdir(self):
-        pass
+    def mkdir(self, bucket, filename):
+        try:
+            return self.__connection.exists(bucket, filename)
+        except Exception as identifier:
+            tb = sys.exc_info()[2]
+            raise UnableToConnect('I have a problem to check if %s exists' %(path)).with_traceback(tb)
 
     def pwd(self):
-        pass
+        return self.__connection.pwd()
 
     def quit(self):
-        pass
+        return self.__connection.quit()
 
     def __set_connection(self, driver, user_config):
         try:
             self.__connection = self.__get_connection(driver, user_config)
         except Exception as identifier:
-            raise UnableToConnect('The driver was unable to connect with error', [driver, identifier])
+            tb = sys.exc_info()[2]
+            raise UnableToConnect('The driver '+driver+' was unable to connect with error '+ identifier.__str__()).with_traceback(tb)
 
     def __get_connection(self, driver, user_config):
         driver_provider = self.__get_provider(driver)
@@ -67,7 +84,6 @@ class FileSystem(object):
         base_config.update(user_config)
         #import pdb; pdb.set_trace()
         return base_config
-
 
 if __name__ == "__main__":
     connection_params = {
