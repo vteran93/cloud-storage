@@ -26,7 +26,7 @@ setuptools.setup(
         'pyasn1-modules==0.2.6',
         'PyNaCl==1.3.0',
         'pysftp==0.2.9',
-        'urllib3,
+        'urllib3',
         'wrapt==1.11.2',
     ],
     url="https://bitbucket.org/houselandbog/imagesuploader",
