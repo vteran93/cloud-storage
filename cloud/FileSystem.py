@@ -48,7 +48,7 @@ class FileSystem(object):
             return self.__connection.exists(bucket, filename)
         except Exception as identifier:
             tb = sys.exc_info()[2]
-            raise UnableToConnect('I have a problem to check if %s exists' %(path)).with_traceback(tb)
+            raise UnableToConnect('I have a problem to create %s ' %(filename)).with_traceback(tb)
 
     def pwd(self):
         return self.__connection.pwd()
