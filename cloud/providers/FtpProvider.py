@@ -1,7 +1,7 @@
 import os
 from ftplib import FTP
 from ftplib import FTP_TLS
-from BaseProvider import BaseProvider
+from cloud.providers.BaseProvider import BaseProvider
 
 class FtpProvider(BaseProvider):
 

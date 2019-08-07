@@ -1,6 +1,6 @@
 import os
 import pysftp
-from BaseProvider import BaseProvider
+from cloud.providers.BaseProvider import BaseProvider
 
 
 class SFTPProvider(BaseProvider):
