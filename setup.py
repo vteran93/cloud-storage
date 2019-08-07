@@ -4,9 +4,9 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name='cloud-uploader',
     version='0.1',
-    scripts=[''],
+    #scripts=[''],
     author="Victor Francisco Teran Herrera",
-    author_email="vteran93@yahoo.es",
+    author_email="vteran93atyahoo.es",
     description="A package to control uploads and downloads from diference platforms",
     long_description=long_description,
     long_description_content_type="text/markdown",
