@@ -36,7 +36,7 @@ class FileSystem(object):
             tb = sys.exc_info()[2]
             raise UnableToUploadFile('The requested file %s was unable to download' %(filename)).with_traceback(tb)
 
-    def exists(self, bucket, path):
+    def exists(self, bucket, path=''):
         try:
             return self.__connection.exists(bucket, path)
         except Exception as identifier:
