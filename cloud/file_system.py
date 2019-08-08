@@ -1,10 +1,10 @@
 import sys
-from .providers.FtpProvider import FtpProvider
-from .providers.SFTPProvider import SFTPProvider
-from .configuration.ConfigLoader import ConfigLoader
-from .providers.GoogleProvider import GoogleProvider
-from .providers.AmazonProvider import AmazonProvider
-from .Exceptions.SystemExceptions import UndefinedDriver, UnableToConnect, UnableToUploadFile, UnableToConnect
+from .providers.ftp_provider import FtpProvider
+from .providers.sftp_provider import SFTPProvider
+from .configuration.config_loader import ConfigLoader
+from .providers.google_provider import GoogleProvider
+from .providers.amazon_provider import AmazonProvider
+from .exceptions.system_exceptions import UndefinedDriver, UnableToConnect, UnableToUploadFile, UnableToConnect
 
 
 class FileSystem(object):

@@ -1,5 +1,5 @@
 
-from cloud.providers.BaseProvider import BaseProvider
+from cloud.providers.base_provider import BaseProvider
 
 
 class AmazonProvider(BaseProvider):

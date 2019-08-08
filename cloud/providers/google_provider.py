@@ -56,8 +56,8 @@ if __name__ == "__main__":
     google_storage =  GoogleProvider()
     google_storage.upload('aBucket','captura.png','mi_captura.png')
     google_storage.download('aBucket', 'mi_captura.png', 'mi_captura_descargada.png')
-    google_storage.mkdir('aBucket','mi_carpeta_creada');
-    google_storage.mkdir('aBucket', 'carpeta2/');
+    google_storage.mkdir('aBucket','mi_carpeta_creada')
+    google_storage.mkdir('aBucket', 'carpeta2/')
     google_storage.pwd()
 
     print('existe %s' % google_storage.exists('aBucket', 'mi_carpeta_creada'))

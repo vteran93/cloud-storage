@@ -1,15 +1,15 @@
 import os
 from ftplib import FTP
 from ftplib import FTP_TLS
-from cloud.providers.BaseProvider import BaseProvider
+from cloud.providers.base_provider import BaseProvider
 
 class FtpProvider(BaseProvider):
 
     def __init__(self, host, port, user, password, tls=False):
         self.__connection = self.__connect(host, port, user, password, tls)
 
-    def upload(self, butcket, filename):
-        return self.__connection.storbinary('STOR %s%s%s'% (butcket, os.sep, filename), open(filename, 'rb'))
+    def upload(self, butcket, filename, destination):
+        return self.__connection.storbinary('STOR %s%s%s'% (butcket, os.sep, destination), open(filename, 'rb'))
 
     def download(self, butcket, filename, destination):
         handle = open(destination + os.sep + filename, 'wb')
@@ -67,7 +67,7 @@ class FtpProvider(BaseProvider):
 if __name__ == "__main__":
 
     ftp = FtpProvider('192.168.10.10', 21, 'vsftp', 'secret', True)
-    ftp.upload('test', 'captura.png')
+    ftp.upload('test', 'captura.png', 'uploaded_captura.png')
     ftp.download('test', 'captura.png', '/home/victor/')
     print( 'mi alma ' + ftp.exists('test', 'mi alma.png').__str__())
     print( 'captura ' + ftp.exists('test', 'captura.png').__str__())

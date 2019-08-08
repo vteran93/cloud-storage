@@ -1,6 +1,3 @@
-from configparser import ConfigParser
-
-
 class ConfigLoader(object):
 
     __config = {
