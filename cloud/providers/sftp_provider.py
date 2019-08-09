@@ -26,12 +26,15 @@ class SFTPProvider(BaseProvider):
     
     def pwd(self):
         return self.__connection.pwd()
-    
+
+    def cwd(self, bucket, destination):
+        return self.__connection.cd(bucket + os.sep + destination)
+
     def quit(self):
         return self.__connection.close()
 
 if __name__ == "__main__":
-    sftp = SFTPProvider("192.168.10.10", '22', 'vagrant');
+    sftp = SFTPProvider("192.168.10.10", '22', 'vagrant')
     sftp.upload('test', 'captura.png',)
     sftp.download('test', 'captura.png')
     print( 'mi alma ' + sftp.exists('test', 'mi alma.png').__str__())

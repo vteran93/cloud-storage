@@ -1,6 +1,6 @@
 import os
 from google.cloud import storage
-from cloud.providers.BaseProvider import BaseProvider
+from cloud.providers.base_provider import BaseProvider
 
 
 class GoogleProvider(BaseProvider):
@@ -41,6 +41,10 @@ class GoogleProvider(BaseProvider):
             #import pdb; pdb.set_trace()
             return self.__blob_manager.path_helper(self.__bucket.path.__str__(), self.__blob_manager.name)
         return os.sep
+
+    def cwd(self, bucket, destination):
+        self.__bucket = self.__connection.get_bucket(bucket)
+        self.__blob_manager = self.__bucket.blob(self.__get_valid_path(filename))
 
     def quit(self):
         del(self.__connection)

@@ -30,5 +30,9 @@ class BaseProvider(AbstractClass):
         raise NotImplementedError()
 
     @abstractmethod
+    def cwd(self):
+        raise NotImplementedError()
+
+    @abstractmethod
     def quit(self):
         raise NotImplementedError()

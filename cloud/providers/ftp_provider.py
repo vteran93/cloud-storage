@@ -27,6 +27,9 @@ class FtpProvider(BaseProvider):
     def pwd(self):
         return self.__connection.pwd()
 
+    def cwd(self, bucket, destination):
+        self.__connection.cwd(bucket + os.sep + destination)
+
     def quit(self):
         return self.__connection.quit()
 

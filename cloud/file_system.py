@@ -53,6 +53,9 @@ class FileSystem(object):
     def pwd(self):
         return self.__connection.pwd()
 
+    def cwd(self, bucket, destination):
+        return self.__connection(bucket, destination)
+
     def quit(self):
         return self.__connection.quit()
 
