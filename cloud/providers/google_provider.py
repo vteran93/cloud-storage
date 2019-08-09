@@ -9,8 +9,8 @@ class GoogleProvider(BaseProvider):
     __connection = None
     __blob_manager = None
 
-    def __init__(self):
-        self.__connection = storage.Client.from_service_account_json(GOOGLE_JSON_KEY)
+    def __init__(self, *args, **kwargs):
+        self.__connection = storage.Client.from_service_account_json(kwargs['google_cloud_storage_key_path'])
 
     def get_connection(self):
         return self.__connection

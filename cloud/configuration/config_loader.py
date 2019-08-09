@@ -3,32 +3,30 @@ class ConfigLoader(object):
     __config = {
         'driver': '',
         'options': {
-            'google': [
-                {'google_cloud_storage_key_path': ''}
-            ],
-            'amazon': [
-                {'amazon_cloud_storage_key_path': ''}
-            ],
+            'google':
+                {'google_cloud_storage_key_path': ''},
+            'amazon':
+                {'amazon_cloud_storage_key_path': ''},
             'ftp': {
                 'host': '',
                 'port': '',
                 'user': '',
                 'password': '',
                 'tls': False,
-            },
+                },
             'ftp_tls': {
                 'host': '',
                 'port': '',
                 'user': '',
                 'password': '',
                 'tls': True,
-            },
+                },
             'sftp': {
                 'host': '',
                 'port': '',
                 'user': '',
                 'password': '',
-            }
+                }
         },
     }
 
