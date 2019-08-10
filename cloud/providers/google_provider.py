@@ -4,7 +4,7 @@ from cloud.providers.base_provider import BaseProvider
 
 
 class GoogleProvider(BaseProvider):
-    
+
     __bucket = None
     __connection = None
     __blob_manager = None
@@ -19,6 +19,7 @@ class GoogleProvider(BaseProvider):
         self.__bucket = self.__connection.get_bucket(butcket)
         self.__blob_manager = self.__bucket.blob(destination)
         self.__blob_manager.upload_from_filename(filename)
+        return self.__blob_manager.public_url
 
     def download(self, butcket, filename, destination):
         self.__bucket = self.__connection.get_bucket(butcket)

@@ -3,16 +3,26 @@ from ftplib import FTP
 from ftplib import FTP_TLS
 from cloud.providers.base_provider import BaseProvider
 
+
 class FtpProvider(BaseProvider):
 
+    __protocol = 'ftp'
+    __host = ''
+    __port = ''
+
     def __init__(self, host, port, user, password, tls=False):
+        self.__host = host
+        self.__port = port
         self.__connection = self.__connect(host, port, user, password, tls)
 
     def upload(self, butcket, filename, destination):
-        return self.__connection.storbinary('STOR %s%s%s'% (butcket, os.sep, destination), open(filename, 'rb'))
+        self.__connection.storbinary('STOR %s%s%s'% (butcket, os.sep, destination), open(filename, 'rb'))
+
+        return self.__get_url(butcket, destination)
 
     def download(self, butcket, filename, destination):
         handle = open(destination + os.sep + filename, 'wb')
+
         return self.__connection.retrbinary('RETR %s%s%s' % (butcket, os.sep, filename), handle.write)
 
     def exists(self, bucket, filename):
@@ -51,7 +61,7 @@ class FtpProvider(BaseProvider):
         ftp = FTP(host=host, user=user, passwd=password)
 
         return ftp
-    
+
     def __exists_folder(self, bucket, filename):
         try:
             self.__connection.cwd(bucket + os.sep + filename)
@@ -60,12 +70,17 @@ class FtpProvider(BaseProvider):
             return True
         except Exception as identifier:
             return False
-    
+
     def __exists_file(self, bucket, filename):
         try:
             return self.__connection.size(bucket + os.sep + filename) > 0
         except Exception as identifier:
             return False
+
+    def __get_url(self, bucket, destination):
+        complete_destination = "%s/%s" % (bucket, destination)
+
+        return "%s://%s:%s/%s" % (self.__protocol, self.__host, self.__port, complete_destination)
 
 if __name__ == "__main__":
 

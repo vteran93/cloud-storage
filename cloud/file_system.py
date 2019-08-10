@@ -24,7 +24,7 @@ class FileSystem(object):
 
     def upload(self, bucket, filename, destination):
         try:
-            self.__connection.upload(bucket, filename, destination)
+            return self.__connection.upload(bucket, filename, destination)
 
         except Exception as identifier:
             tb = sys.exc_info()[2]
