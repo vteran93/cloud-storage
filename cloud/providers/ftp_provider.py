@@ -2,7 +2,7 @@ import os
 from ftplib import FTP
 from ftplib import FTP_TLS
 from cloud.providers.base_provider import BaseProvider
-
+from cloud.providers.url_maker import UrlMaker
 
 class FtpProvider(BaseProvider):
 
@@ -14,6 +14,7 @@ class FtpProvider(BaseProvider):
         self.__host = host
         self.__port = port
         self.__connection = self.__connect(host, port, user, password, tls)
+        self.__url_maker = UrlMaker(self.__protocol, host, user, password, port)
 
     def upload(self, butcket, filename, destination):
         self.__connection.storbinary('STOR %s%s%s'% (butcket, os.sep, destination), open(filename, 'rb'))
@@ -78,9 +79,7 @@ class FtpProvider(BaseProvider):
             return False
 
     def __get_url(self, bucket, destination):
-        complete_destination = "%s/%s" % (bucket, destination)
-
-        return "%s://%s:%s/%s" % (self.__protocol, self.__host, self.__port, complete_destination)
+        return self.__url_maker.get_url(bucket, destination)
 
 if __name__ == "__main__":
 

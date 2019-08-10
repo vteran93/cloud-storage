@@ -1,13 +1,14 @@
 import os
 import pysftp
 from cloud.providers.base_provider import BaseProvider
-
+from cloud.providers.url_maker import UrlMaker
 
 class SFTPProvider(BaseProvider):
 
     def __init__(self, host, port, user, password=None):
         #super(SFTPProvider, self).__init__(*args))
         self.__connection = pysftp.Connection(host, username=user, password=password)
+        self.__url_maker = UrlMaker(self.__protocol, host, user, password, port)
 
     def upload(self, butcket, filename, destination=''):
         return self.__connection.put(filename, "%s%s%s%s" %(butcket, os.sep, destination,filename))
@@ -32,6 +33,9 @@ class SFTPProvider(BaseProvider):
 
     def quit(self):
         return self.__connection.close()
+
+    def __get_url(self, bucket, destination):
+        return self.__url_maker.get_url(bucket, destination)
 
 if __name__ == "__main__":
     sftp = SFTPProvider("192.168.10.10", '22', 'vagrant')
