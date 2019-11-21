@@ -2,12 +2,12 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 setuptools.setup(
-    name='cloud-uploader',
+    name='cloud-storage',
     version='0.1',
     #scripts=[''],
     author="Victor Francisco Teran Herrera",
     author_email="vteran93atyahoo.es",
-    description="A package to control uploads and downloads from diference platforms",
+    description="A package to control uploads and downloads from different platforms",
     long_description=long_description,
     long_description_content_type="text/markdown",
     install_requires=[
@@ -28,12 +28,16 @@ setuptools.setup(
         'pysftp==0.2.9',
         'urllib3',
         'wrapt==1.11.2',
+        'nose'
     ],
     url='https://bitbucket.org/houselandbog/cloud-uploader',
+    package_dir={'': 'src'},
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    test_suite='nose.collector',
+    tests_require=['nose'],
 )

@@ -5,6 +5,8 @@ from cloud.providers.url_maker import UrlMaker
 
 class SFTPProvider(BaseProvider):
 
+    __protocol= 'ftps'
+
     def __init__(self, host, port, user, password=None):
         #super(SFTPProvider, self).__init__(*args))
         self.__connection = pysftp.Connection(host, username=user, password=password)

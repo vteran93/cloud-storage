@@ -1,8 +1,8 @@
 import os
 from ftplib import FTP
 from ftplib import FTP_TLS
-from cloud.providers.base_provider import BaseProvider
-from cloud.providers.url_maker import UrlMaker
+from .base_provider import BaseProvider
+from .url_maker import UrlMaker
 
 class FtpProvider(BaseProvider):
 
