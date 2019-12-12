@@ -1,6 +1,6 @@
 import os
 from google.cloud import storage
-from cloud.providers.base_provider import BaseProvider
+from .base_provider import BaseProvider
 
 
 class GoogleProvider(BaseProvider):
