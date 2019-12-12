@@ -1,7 +1,7 @@
 import os
 import pysftp
-from cloud.providers.base_provider import BaseProvider
-from cloud.providers.url_maker import UrlMaker
+from cloud.storage.providers.base_provider import BaseProvider
+from cloud.storage.providers.url_maker import UrlMaker
 
 class SFTPProvider(BaseProvider):
 
