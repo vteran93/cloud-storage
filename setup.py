@@ -31,7 +31,7 @@ setuptools.setup(
         'wrapt==1.11.2',
         'nose'
     ],
-    url='https://bitbucket.org/houselandbog/cloud-uploader',
+    url='https://bitbucket.org/houselandbog/cloud-storage',
     package_dir={'': 'src'},
     packages=setuptools.find_packages(),
     classifiers=[

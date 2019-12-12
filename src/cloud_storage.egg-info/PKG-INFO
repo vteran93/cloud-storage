@@ -14,7 +14,7 @@ Description: # images-uploader
         
         clase ImagesController
         
-        Tiene los métodos
+        Tiene los mÃ©todos
         
         - Upload
         - Download
