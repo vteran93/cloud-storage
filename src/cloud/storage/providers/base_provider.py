@@ -4,8 +4,6 @@ from abc import ABC as AbstractClass
 
 class BaseProvider(AbstractClass):
 
-    __connection = None
-
     def __init__(self, host, port, user, password):
         raise NotImplementedError()
 

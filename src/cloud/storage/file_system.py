@@ -17,8 +17,6 @@ class FileSystem(object):
         'ftp_tls': FtpProvider,
     }
 
-    __connection = None
-
     def __init__(self, driver, user_config={}):
         self.__set_connection(driver, user_config)
 

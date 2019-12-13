@@ -23,7 +23,7 @@ class FtpProvider(BaseProvider):
 
     def download(self, butcket, filename, destination):
         handle = open(destination + os.sep + filename, 'wb')
-
+        
         return self.__connection.retrbinary('RETR %s%s%s' % (butcket, os.sep, filename), handle.write)
 
     def exists(self, bucket, filename):

@@ -39,7 +39,6 @@ class GoogleProvider(BaseProvider):
 
     def pwd(self):
         if self.__bucket != None and self.__blob_manager != None:
-            #import pdb; pdb.set_trace()
             return self.__blob_manager.path_helper(self.__bucket.path.__str__(), self.__blob_manager.name)
         return os.sep
 
