@@ -31,3 +31,9 @@ Dependencias
 - pysftp
 - boto3 Amazon Simple Storage Service 
 - ftplib
+
+Para generar el coverage con ejecución de las pruebas unitarias
+
+```bash
+$ nosetests-3.4.exe --with-coverage --cover-package=cloud.storage --cover-html
+```

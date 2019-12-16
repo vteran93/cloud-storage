@@ -5,18 +5,22 @@ from .url_maker import UrlMaker
 
 class SFTPProvider(BaseProvider):
 
-    __protocol= 'ftps'
+    __protocol= 'sftp'
 
     def __init__(self, host, port, user, password=None):
-        #super(SFTPProvider, self).__init__(*args))
         self.__connection = pysftp.Connection(host, username=user, password=password)
         self.__url_maker = UrlMaker(self.__protocol, host, user, password, port)
 
-    def upload(self, butcket, filename, destination=''):
-        return self.__connection.put(filename, "%s%s%s%s" %(butcket, os.sep, destination,filename))
+    def upload(self, butcket, file_name, destination_folder=''):
+        real_file_name = self.__get_real_file_name(file_name)
+        self.__connection.put(file_name, "%s%s%s%s" %(butcket, os.sep, destination_folder, real_file_name))
+        
+        return self.__url_maker.get_url(butcket, destination_folder)
 
     def download(self, butcket, filename, destination=''):
-        return self.__connection.get("%s%s%s%s" %(butcket, os.sep, filename, destination), destination)
+        remote_path = "%s%s%s" % (butcket, os.sep, filename)
+        
+        return self.__connection.get(remote_path, destination)
 
     def exists(self, bucket, filename):
         return self.__connection.exists('%s%s%s' % (bucket, os.sep, filename))
@@ -38,6 +42,9 @@ class SFTPProvider(BaseProvider):
 
     def __get_url(self, bucket, destination):
         return self.__url_maker.get_url(bucket, destination)
+
+    def __get_real_file_name(self, file_name):
+        return file_name.split(os.sep).pop()
 
 if __name__ == "__main__":
     sftp = SFTPProvider("192.168.10.10", '22', 'vagrant')

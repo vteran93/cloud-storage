@@ -15,9 +15,9 @@ class UrlMaker(object):
         self.port = port
 
     def get_url(self, bucket, destination):
-        complete_destination_path = "%s/%s" % (bucket, destination)
-        return "%s://%s%s:%s/%s" % (self.protocol, self.__get_authority(),
-                                  self.__get_host(), self.port, complete_destination_path)
+        complete_destination_path = "%s/%s" % (bucket, destination.replace('\\', '/'))
+        
+        return "%s://%s%s:%s/%s" % (self.protocol, self.__get_authority(), self.__get_host(), self.port, complete_destination_path)
 
     def __get_authority(self):
 
