@@ -23,7 +23,6 @@ class FileSystem(object):
     def upload(self, bucket, filename, destination):
         try:
             return self.__connection.upload(bucket, filename, destination)
-
         except Exception as identifier:
             tb = sys.exc_info()[2]
             raise UnableToUploadFile('The requested file %s was unable to upload' %(filename)).with_traceback(tb)
