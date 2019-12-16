@@ -36,17 +36,19 @@ class TestFtpProvider(TestCase):
     @mock.patch('cloud.storage.providers.ftp_provider.FTP_TLS', autospec=True)
     @mock.patch('builtins.open', create=True)
     def tests_ftp_with_tls_upload_file(self, mock_reader, mock_ftp_constructor):
-        destination_folder = 'a_destination'
-        expected_ftp_command = 'STOR %s%s%s'% (self.__butcket_to_test, os.sep, destination_folder)
+        destination_file = 'a_destination_file_name.txt'
+        expected_ftp_command = 'STOR %s%s%s'% (self.__butcket_to_test, os.sep, destination_file)
+        expected_uploaded_path = 'ftp://%s:%s@%s:%s/%s/%s' % (self.user, self.password, self.host, self.port, self.__butcket_to_test, destination_file)
         mock_ftp_instance = self.__prepare_mock_ftp_instance(mock_ftp_constructor.return_value)
         mock_ftp_instance.storbinary.return_value = True
 
         self.__file_system = FileSystem('ftp_tls')
-        self.__file_system.upload(self.__butcket_to_test, self.__file_name_to_test, destination_folder)
+        file_loaded_url = self.__file_system.upload(self.__butcket_to_test, self.__file_name_to_test, destination_file)
 
         mock_ftp_constructor.assert_called_with(self.host)
         mock_ftp_instance.login.assert_called_with(self.user, self.password)
         mock_ftp_instance.storbinary.assert_called_with(expected_ftp_command, mock_reader.return_value)
+        self.assertEqual(expected_uploaded_path, file_loaded_url)
 
     def __prepare_enviroment(self):
         self.__butcket_to_test = 'a_bucket'
