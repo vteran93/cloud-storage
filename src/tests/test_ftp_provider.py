@@ -69,7 +69,6 @@ class TestFtpProvider(TestCase):
         mock_ftp_instance.storbinary.assert_called_with(expected_ftp_command, mock_reader.return_value)
         self.assertEqual(expected_uploaded_path, file_loaded_url)
     
-
     def __prepare_enviroment(self):
         self.__butcket_to_test = 'a_bucket'
         self.__file_name_to_test = 'a_file.txt'
