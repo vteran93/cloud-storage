@@ -1,1 +1,2 @@
 from .test_ftp_provider import TestFtpProvider
+from .test_sftp_provider import TestSftpProvider
