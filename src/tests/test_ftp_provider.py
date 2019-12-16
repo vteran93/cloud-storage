@@ -68,6 +68,22 @@ class TestFtpProvider(TestCase):
         mock_ftp_constructor.assert_called_with(host='localhost', user='my_user', passwd='my_password')
         mock_ftp_instance.storbinary.assert_called_with(expected_ftp_command, mock_reader.return_value)
         self.assertEqual(expected_uploaded_path, file_loaded_url)
+
+    @mock.patch('cloud.storage.providers.ftp_provider.FTP', autospec=True)
+    @mock.patch('builtins.open', create=True)
+    def tests_ftp_download_file(self, mock_writer, mock_ftp_constructor):
+        self.tls_secure = False
+        self.__prepare_enviroment()
+
+        expected_ftp_command = 'RETR %s%s%s' % (self.__butcket_to_test, os.sep, self.__file_name_to_test)
+        mock_ftp_instance = mock_ftp_constructor.return_value
+        mock_ftp_instance.retrbinary.return_value = True
+
+        self.__file_system = FileSystem('ftp', self.__login_arguments)
+        self.__file_system.download(self.__butcket_to_test, self.__file_name_to_test, 'a_destination')
+        
+        mock_ftp_constructor.assert_called_with(host='localhost', user='my_user', passwd='my_password')
+        mock_ftp_instance.retrbinary.assert_called_with(expected_ftp_command, mock_writer.return_value.write)
     
     def __prepare_enviroment(self):
         self.__butcket_to_test = 'a_bucket'
