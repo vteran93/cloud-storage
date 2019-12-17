@@ -11,14 +11,14 @@ class SFTPProvider(BaseProvider):
         self.__connection = pysftp.Connection(host, username=user, password=password)
         self.__url_maker = UrlMaker(self.__protocol, host, user, password, port)
 
-    def upload(self, butcket, file_name, destination_folder=''):
+    def upload(self, bucket, file_name, destination_folder=''):
         real_file_name = self.__get_real_file_name(file_name)
-        self.__connection.put(file_name, "%s%s%s%s" %(butcket, os.sep, destination_folder, real_file_name))
+        self.__connection.put(file_name, "%s%s%s%s" %(bucket, os.sep, destination_folder, real_file_name))
         
-        return self.__url_maker.get_url(butcket, destination_folder)
+        return self.__url_maker.get_url(bucket, destination_folder)
 
-    def download(self, butcket, filename, destination=''):
-        remote_path = "%s%s%s" % (butcket, os.sep, filename)
+    def download(self, bucket, filename, destination=''):
+        remote_path = "%s%s%s" % (bucket, os.sep, filename)
         
         return self.__connection.get(remote_path, destination)
 
