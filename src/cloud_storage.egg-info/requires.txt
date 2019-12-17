@@ -15,3 +15,4 @@ PyNaCl
 pysftp
 urllib3
 wrapt
+nose

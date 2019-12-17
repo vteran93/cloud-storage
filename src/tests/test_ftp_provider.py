@@ -1,7 +1,6 @@
 import os
 import unittest
 import builtins
-from ftplib import FTP, FTP_TLS
 from unittest import mock, TestCase
 from cloud.storage.file_system import FileSystem
 from cloud.storage.providers.ftp_provider import FtpProvider
