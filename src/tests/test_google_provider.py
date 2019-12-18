@@ -54,10 +54,6 @@ class TestGoogleProvider(TestCase):
         instance_client.get_bucket.return_value = mock_bucket
 
         return mock_blob_manager
-
-        
-
-    
-       
+   
 if __name__ == '__main__':
     unittest.main()
