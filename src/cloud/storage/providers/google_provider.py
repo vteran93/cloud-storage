@@ -15,26 +15,24 @@ class GoogleProvider(BaseProvider):
     def get_connection(self):
         return self.__connection
 
-    def upload(self, butcket, filename, destination):
-        self.__bucket = self.__connection.get_bucket(butcket)
-        self.__blob_manager = self.__bucket.blob(destination)
+    def upload(self, bucket, filename, destination):
+        self.__blob_manager = self.__prepare_mock_manager(bucket, destination)
         self.__blob_manager.upload_from_filename(filename)
+        
         return self.__blob_manager.public_url
 
-    def download(self, butcket, filename, destination):
-        self.__bucket = self.__connection.get_bucket(butcket)
-        self.__blob_manager = self.__bucket.blob(filename)
+    def download(self, bucket, filename, destination):
+        self.__blob_manager = self.__prepare_mock_manager(bucket, filename)
         self.__blob_manager.download_to_filename(destination)
 
     def exists(self, bucket, filename):
-        self.__bucket = self.__connection.get_bucket(bucket)
-        self.__blob_manager = self.__bucket.blob(filename)
+        self.__blob_manager = self.__prepare_mock_manager(bucket, filename)
+        
         return self.__blob_manager.exists()
 
     def mkdir(self, bucket, path):
         path = self.__get_valid_path(path)
-        self.__bucket = self.__connection.get_bucket(bucket)
-        self.__blob_manager = self.__bucket.blob(path)
+        self.__blob_manager = self.__prepare_mock_manager(bucket, path)
         self.__blob_manager.upload_from_string('')
 
     def pwd(self):
@@ -44,7 +42,7 @@ class GoogleProvider(BaseProvider):
 
     def cwd(self, bucket, destination):
         self.__bucket = self.__connection.get_bucket(bucket)
-        self.__blob_manager = self.__bucket.blob(self.__get_valid_path(filename))
+        self.__blob_manager = self.__bucket.blob(self.__get_valid_path(destination))
 
     def quit(self):
         del(self.__connection)
@@ -53,6 +51,11 @@ class GoogleProvider(BaseProvider):
 
     def __get_valid_path(self, path):
         return path + os.sep if path[len(path)-1] != os.sep else path
+
+    def __prepare_mock_manager(self, bucket, destination):
+        self.__bucket = self.__connection.get_bucket(bucket)
+        
+        return self.__bucket.blob(destination)
 
 if __name__ == "__main__":
     import os
