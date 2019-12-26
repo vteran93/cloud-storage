@@ -20,7 +20,11 @@ class LocalProvider(BaseProvider):
         bucket : str, the base folder to storage the files
         filename: str, the source base path for the uploaded file like a/path/with/file.txt
         destination: str, the destination path a/destination/folder/path/new_name_file.txt
-        return 
+        
+        Returns
+        -------
+        destination path
+            The path where the new file it is
         """
 
         destination_path = self.__get_file_path(destination)
