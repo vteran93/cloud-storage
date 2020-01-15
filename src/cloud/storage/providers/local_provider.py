@@ -1,5 +1,7 @@
 import os
 import shutil
+from copy import copy
+from queue import deque
 from .base_provider import BaseProvider
 
 class LocalProvider(BaseProvider):
@@ -26,13 +28,16 @@ class LocalProvider(BaseProvider):
         destination path
             The path where the new file it is
         """
-
-        destination_path = self.__get_file_path(destination)
+        destination_path = self.get_file_path(destination)
         destination_file_name = os.path.join(bucket, destination)
-        if os.path.isfile(filename) and self.exists(bucket, destination_path):
-            return shutil.copyfile(filename, destination_file_name)
+
+        if not os.path.isfile(filename):
+            raise Exception('The source file does not exists')
+        elif not self.exists(bucket, destination_path):
+            self.mkdir(bucket, destination_path)
+            return self.upload(bucket, filename, destination)
         else:
-            raise Exception('The filepath does not exists')
+            return shutil.copyfile(filename, destination_file_name)
 
     def download(self, butcket, filename, destination):
         raise NotImplementedError()
@@ -50,9 +55,20 @@ class LocalProvider(BaseProvider):
         if os.path.isdir(path_to_create):
             raise Exception('Path already exists')
         else:
-            os.mkdir(path_to_create)
+            self.__build_path(path_to_create)
 
             return path_to_create
+
+    def __build_path(self, requested_path):
+        path_parts = deque(requested_path.split(os.sep))
+        new_path_parts = copy(path_parts)
+        for folder in path_parts:
+            if os.path.exists(folder):
+                self.cwd(folder)
+            else:
+                os.mkdir(folder)
+                new_path_parts.popleft()
+                return self.__build_path(os.sep.join(path_parts))
 
     def pwd(self):
         return os.path.curdir()
