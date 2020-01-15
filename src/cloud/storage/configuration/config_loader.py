@@ -27,6 +27,10 @@ class ConfigLoader(object):
                 'user': '',
                 'password': '',
                 }
+            'local':{
+                'host': '',
+                'port': ''
+            }
         },
     }
 
