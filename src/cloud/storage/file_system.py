@@ -5,7 +5,7 @@ from .configuration.config_loader import ConfigLoader
 from .providers.google_provider import GoogleProvider
 from .providers.amazon_provider import AmazonProvider
 from .providers.local_provider import LocalProvider
-from .exceptions.system_exceptions import UndefinedDriver, UnableToConnect, UnableToUploadFile, UnableToConnect, 
+from .exceptions.system_exceptions import UndefinedDriver, UnableToConnect, UnableToUploadFile, UnableToConnect
 
 
 class FileSystem(object):
