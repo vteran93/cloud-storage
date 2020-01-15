@@ -1,3 +1,4 @@
+import os
 from abc import abstractmethod
 from abc import ABC as AbstractClass
 
@@ -34,3 +35,9 @@ class BaseProvider(AbstractClass):
     @abstractmethod
     def quit(self):
         raise NotImplementedError()
+
+    def __get_real_file_name(self, file_name):
+        return os.path.basename(file_name)
+    
+    def __get_file_path(self, file_name):
+        return os.path.dirname(a_path) 

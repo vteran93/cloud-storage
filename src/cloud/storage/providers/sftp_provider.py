@@ -43,9 +43,6 @@ class SFTPProvider(BaseProvider):
     def __get_url(self, bucket, destination):
         return self.__url_maker.get_url(bucket, destination)
 
-    def __get_real_file_name(self, file_name):
-        return file_name.split(os.sep).pop()
-
 if __name__ == "__main__":
     sftp = SFTPProvider("192.168.10.10", '22', 'vagrant')
     sftp.upload('test', 'captura.png',)
