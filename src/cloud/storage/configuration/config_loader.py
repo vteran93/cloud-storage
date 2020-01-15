@@ -26,7 +26,7 @@ class ConfigLoader(object):
                 'port': '',
                 'user': '',
                 'password': '',
-                }
+                },
             'local':{
                 'host': '',
                 'port': ''
