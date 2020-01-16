@@ -45,7 +45,7 @@ class FileSystem(object):
 
     def mkdir(self, bucket, filename):
         try:
-            return self.__connection.exists(bucket, filename)
+            return self.__connection.mkdir(bucket, filename)
         except Exception as identifier:
             tb = sys.exc_info()[2]
             raise UnableToConnect('I have a problem to create %s ' %(filename)).with_traceback(tb)

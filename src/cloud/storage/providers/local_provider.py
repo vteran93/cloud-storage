@@ -3,11 +3,10 @@ import shutil
 from copy import copy
 from queue import deque
 from .base_provider import BaseProvider
+from .url_maker import UrlMaker
+
 
 class LocalProvider(BaseProvider):
-
-    __bucket = None
-    __connection = None
 
     def __init__(self, host, port, user=False, password=False):
         self.host = host
@@ -43,6 +42,9 @@ class LocalProvider(BaseProvider):
         raise NotImplementedError()
 
     def exists(self, bucket, filename):
+        if bucket == filename:
+            return True
+
         path_to_check = os.path.join(bucket, filename)
         if os.path.isdir(path_to_check):
             return True
@@ -51,27 +53,15 @@ class LocalProvider(BaseProvider):
         return False
 
     def mkdir(self, bucket, path):
-        path_to_create = os.path.join(bucket, path)
-        if os.path.isdir(path_to_create):
-            raise Exception('Path already exists')
+        path_with_bucket_to_create = os.path.join(bucket, os.sep.join(path))
+        if os.path.isdir(path_with_bucket_to_create):
+            return True
         else:
-            self.__build_path(path_to_create)
-
-            return path_to_create
-
-    def __build_path(self, requested_path):
-        path_parts = deque(requested_path.split(os.sep))
-        new_path_parts = copy(path_parts)
-        for folder in path_parts:
-            if os.path.exists(folder):
-                self.cwd(folder)
-            else:
-                os.mkdir(folder)
-                new_path_parts.popleft()
-                return self.__build_path(os.sep.join(path_parts))
+            os.makedirs(os.path.join(bucket, path))
+            return True
 
     def pwd(self):
-        return os.path.curdir()
+        return os.path.curdir
 
     def cwd(self, directory):
         return os.chdir(directory)

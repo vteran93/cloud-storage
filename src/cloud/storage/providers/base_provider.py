@@ -38,6 +38,6 @@ class BaseProvider(AbstractClass):
 
     def __get_real_file_name(self, file_name):
         return os.path.basename(file_name)
-    
-    def __get_file_path(self, file_name):
-        return os.path.dirname(a_path) 
+
+    def get_file_path(self, file_name):
+        return os.path.dirname(file_name) 

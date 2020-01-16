@@ -7,7 +7,7 @@ class UrlMaker(object):
     protocol = None
     password = None
 
-    def __init__(self, protocol, host, user, password, port):
+    def __init__(self, protocol=None, host=None, user=None, password=None, port=None):
         self.protocol = protocol
         self.host = host
         self.user = user
