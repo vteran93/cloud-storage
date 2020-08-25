@@ -9,11 +9,11 @@ class BaseProvider(AbstractClass):
         raise NotImplementedError()
 
     @abstractmethod
-    def upload(self, butcket, filename, destination):
+    def upload(self, bucket, filename, destination):
         raise NotImplementedError()
 
     @abstractmethod
-    def download(self, butcket, filename, destination):
+    def download(self, bucket, filename, destination):
         raise NotImplementedError()
     
     @abstractmethod

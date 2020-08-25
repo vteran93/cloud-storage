@@ -6,7 +6,10 @@ class ConfigLoader(object):
             'google':
                 {'google_cloud_storage_key_path': ''},
             'amazon':
-                {'amazon_cloud_storage_key_path': ''},
+                {
+                 'aws_access_key': '',
+                 'aws_secret_access_key': ''
+                 },
             'ftp': {
                 'host': '',
                 'port': '',
