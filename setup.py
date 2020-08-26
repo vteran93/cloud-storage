@@ -54,7 +54,7 @@ setuptools.setup(
         'wrapt==1.12.1',
     ],
     url='https://bitbucket.org/houselandbog/cloud-storage',
-    package_dir={'': 'src'},
+    #package_dir={'': ''},
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
