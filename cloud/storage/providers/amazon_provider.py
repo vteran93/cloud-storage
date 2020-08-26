@@ -8,8 +8,9 @@ from botocore.exceptions import NoCredentialsError, ClientError
 class AmazonProvider(BaseProvider):
 
     def __init__(self, *args, **kwargs):
+        import pdb; pdb.set_trace()
         self.__connection = boto3.client('s3',
-                                         aws_access_key=kwargs['aws_access_key'],
+                                         aws_access_key_id=kwargs['aws_access_key'],
                                          aws_secret_access_key=kwargs['aws_secret_access_key'])
 
     def upload(self, bucket, filename, destination):
