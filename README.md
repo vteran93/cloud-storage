@@ -2,6 +2,14 @@
 
 Dependencia para cargar imagenes de acuerdo al driver.
 
+## LICENCE
+<cloud-storage>  Copyright (C) <2020>  <Victor Teran Herrera>
+
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it
+under certain conditions
+
+
 # Punto de entrada
 
 clase ImagesController
